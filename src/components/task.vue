@@ -10,7 +10,7 @@
             {{ text }}
         </p>
         <div v-else>
-            <input ref="updateInput" @keyup.enter="updateTask" v-model="updateValue" type="text">
+            <input class="card__editor" ref="updateInput" @keyup.enter="updateTask" v-model="updateValue" type="text">
         </div>
     </div>
 </template>
@@ -20,14 +20,14 @@
     import { useStore } from '../store/store';
     import { onClickOutside } from '@vueuse/core'
 
-    const { id } = defineProps({
+    const { id, text } = defineProps({
         text: String,
         id: String | Number,
         num: Number
     })
 
     const store = useStore()
-    const updateValue = ref('')
+    const updateValue = ref(text)
     const updateShow = ref(false)
     const updateInput = ref(null)
 
@@ -67,6 +67,15 @@
         &__description {
             font-size: 16px;
             margin: 0;
+        }
+        &__editor {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid white;
+            outline: none;
+            font-size: 16px;
+            font-family: 'IBM Plex Sans', Inter, Avenir, Helvetica, Arial, sans-serif;
+            padding: 0;
         }
     }
 </style>
