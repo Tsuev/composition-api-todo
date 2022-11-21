@@ -4,15 +4,22 @@
       class="form__field" 
       placeholder="empty"
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)" 
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" 
       @keyup.enter="$emit('addTask')"
     />
     <label for="name" class="form__label">{{ label }}</label>
 </template>
 
-<script setup>
-    defineProps({ label: String, modelValue: String })
-    defineEmits(['update:modelValue', 'addTask'])
+<script setup lang="ts">
+    defineProps<{ 
+        label: string, 
+        modelValue: string 
+    }>()
+    
+    defineEmits<{
+        (e: 'update:modelValue'): string,
+        (e: 'addTask'): void
+    }>()
 </script>
 
 <style lang='scss'>

@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" draggable="true">
         <div class="card__title">
             <h4>Задача #{{ num + 1 }}</h4>
             <div @click="deleteTask" class="card__title__delete">❌</div>
@@ -15,24 +15,24 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     import { ref } from 'vue';
     import { useStore } from '../store/store';
     import { onClickOutside } from '@vueuse/core'
 
-    const { id, text } = defineProps({
-        text: String,
-        id: String | Number,
-        num: Number
-    })
+    const { id, text } = defineProps<{
+        text: string,
+        id: string,
+        num: number
+    }>()
 
     const store = useStore()
-    const updateValue = ref(text)
-    const updateShow = ref(false)
-    const updateInput = ref(null)
+    const updateValue = ref<string>(text)
+    const updateShow = ref<boolean>(false)
+    const updateInput = ref<null>(null)
 
-    const deleteTask = () => store.deleteTask(id)
-    const updateTask = () => {
+    const deleteTask = (): void => store.deleteTask(id)
+    const updateTask = (): void => {
         store.updateTask({ id, text: updateValue.value })
         updateShow.value = false
     }
