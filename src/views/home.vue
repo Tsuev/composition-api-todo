@@ -1,12 +1,12 @@
 <template>
-    <div class="default">
+    <div class="home">
         <div class="container">
             <slot />
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
     
 </script>
 

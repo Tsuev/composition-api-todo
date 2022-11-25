@@ -1,33 +1,29 @@
 <template>
-    <input 
-      type="input" 
-      class="form__field" 
-      placeholder="empty"
-      :value="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" 
-      @keyup.enter="$emit('addTask')"
-    />
+    <input type="input" class="form__field" placeholder="empty" :value="modelValue"
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        @keyup.enter="$emit('addTask')" />
     <label for="name" class="form__label">{{ label }}</label>
 </template>
 
 <script setup lang="ts">
-    defineProps<{ 
-        label: string, 
-        modelValue: string 
-    }>()
-    
-    defineEmits<{
-        (e: 'update:modelValue'): string,
-        (e: 'addTask'): void
-    }>()
+defineProps<{
+    label: string,
+    modelValue: string
+}>()
+
+defineEmits<{
+    (e: 'update:modelValue'): string,
+    (e: 'addTask'): void
+}>()
 </script>
 
 <style lang='scss'>
-    $primary: #11998e;
-    $secondary: #38ef7d;
-    $white: #fff;
-    $gray: #9b9b9b;
-    .form__field {
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+
+.form__field {
     margin-right: 10px;
     font-family: inherit;
     width: 30%;
@@ -40,42 +36,50 @@
     background: transparent;
     transition: border-color 0.2s;
     margin-bottom: 30px;
-    
+
     &::placeholder {
         color: transparent;
     }
 
-    &:placeholder-shown ~ .form__label {
+    &:placeholder-shown~.form__label {
         font-size: 1.3rem;
         cursor: text;
         top: 35px;
     }
-    }
-    .form__label {
+}
+
+.form__label {
     position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;
     font-size: 16px;
     color: $gray;
-    }
-    .form__field:focus {
-    ~ .form__label {
+}
+
+.form__field:focus {
+    ~.form__label {
         position: absolute;
         top: 0;
         display: block;
         transition: 0.2s;
         font-size: 16px;
         color: $primary;
-        font-weight:700;    
+        font-weight: 700;
     }
-    padding-bottom: 6px;  
+
+    padding-bottom: 6px;
     font-weight: 700;
     border-width: 3px;
-    border-image: linear-gradient(to right, $primary,$secondary);
+    border-image: linear-gradient(to right, $primary, $secondary);
     border-image-slice: 1;
+}
+
+.form__field {
+
+    &:required,
+    &:invalid {
+        box-shadow: none;
     }
-    .form__field{
-    &:required,&:invalid { box-shadow:none; }
-    }
+}
 </style>
